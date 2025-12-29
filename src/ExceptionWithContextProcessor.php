@@ -73,7 +73,7 @@ class ExceptionWithContextProcessor implements ProcessorInterface
         // there, so as to enable users to still pass custom data if needed.
         $newContext = $this->mergeContextWithExceptionContext($record->context, $exception);
 
-        // Return a new LogRecord with updated context and extra
+        // Return a new LogRecord with updated context and extra.
         return $record->with(
             context: $newContext,
             extra: $newExtra,

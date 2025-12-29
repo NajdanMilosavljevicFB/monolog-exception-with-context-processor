@@ -230,9 +230,10 @@ class ExceptionWithContextProcessorTest extends TestCase
         $this->assertInstanceOf(LogRecord::class, $processedRecord);
         $this->assertSame('test', $processedRecord->channel);
         $this->assertSame('An error message.', $processedRecord->message);
-        $this->assertSame($exception, $processedRecord->context['exception']) ?? null;
-        $this->assertSame('bar', $processedRecord->context['foo']);
+        $this->assertSame($exception, $processedRecord->context['exception'] ?? null);
+        $this->assertSame('bar', $processedRecord->context['foo'] ?? null);
         $this->assertArrayHasKey('exception_chain_with_context', $processedRecord->extra);
+
         $expectedExceptionChainWithContext = [
             [
                 'exception' => 'RuntimeException',
@@ -270,10 +271,11 @@ class ExceptionWithContextProcessorTest extends TestCase
         $this->assertInstanceOf(LogRecord::class, $processedRecord);
         $this->assertSame('test', $processedRecord->channel);
         $this->assertSame('An error message.', $processedRecord->message);
-        $this->assertSame($exception, $processedRecord->context['exception']);
-        $this->assertSame('qux', $processedRecord->context['baz']);
-        $this->assertSame('bar', $processedRecord->context['foo']) ?? null;
+        $this->assertSame($exception, $processedRecord->context['exception'] ?? null);
+        $this->assertSame('qux', $processedRecord->context['baz'] ?? null);
+        $this->assertSame('bar', $processedRecord->context['foo'] ?? null);
         $this->assertArrayHasKey('exception_chain_with_context', $processedRecord->extra);
+
         $expectedExceptionChainWithContext = [
             [
                 'exception' => 'Tests\Levacic\Monolog\DummyExceptionWithContext',
